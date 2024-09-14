@@ -2,24 +2,24 @@ let fstOperand;
 let sndOperand;
 let operator;
 
-function add(num1, num2){
+function add(num1, num2) {
     return num1 + num2;
 }
 
-function subtract(num1, num2){
+function subtract(num1, num2) {
     return num1 - num2;
 }
 
-function multiply(num1, num2){
-    return num1*num2;
+function multiply(num1, num2) {
+    return num1 * num2;
 }
 
-function divide(num1, num2){
-    return num1/num2;
+function divide(num1, num2) {
+    return num1 / num2;
 }
 
-function operate(fstOperand, sndOperand, operator){
-    switch (operator){
+function operate(fstOperand, sndOperand, operator) {
+    switch (operator) {
         case "+":
             return add(fstOperand, sndOperand);
 
@@ -28,7 +28,7 @@ function operate(fstOperand, sndOperand, operator){
 
         case "*":
             return multiply(fstOperand, sndOperand);
-        
+
         case "/":
             return divide(fstOperand, sndOperand);
 
