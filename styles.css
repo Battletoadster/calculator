@@ -16,25 +16,39 @@ html {
 
 .btn-container {
     display: flex;
-    justify-content: space-between;
     width: 400px;
-    align-items: flex-start;
+    gap: 6px;
 }
 
-.number-container {
+.number-and-special-container {
     display: flex;
+    flex-direction: column;
+    flex: 1 0 80%;
+}
+
+.number-container,
+.clear-container,
+.zero-container {
+    display: flex;
+    flex-wrap: wrap-reverse;
     flex-basis: 80%;
-    flex-wrap: wrap;
-    justify-content: center;
 }
 
 .operation-container {
     display: flex;
     flex-direction: column;
     flex-basis: 20%;
+    justify-content: space-between;
 }
 
-.number-btn {
+.clear-btn,
+.number-btn,
+.special-btn,
+.percentage-btn,
+.floating-point-btn,
+.clear-btn,
+.sign-btn,
+.backspc-btn {
     flex: 1 0 33%;
 }
 
