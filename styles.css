@@ -1,17 +1,43 @@
-*{
-    outline: 2px solid pink;
-}
-
-body, html{
+body,
+html {
     margin: 0;
     padding: 0;
     height: 100%;
 }
 
-.calculator{
+.calculator {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    gap: 16px;
     height: 100%;
+}
+
+.btn-container {
+    display: flex;
+    justify-content: space-between;
+    width: 400px;
+    align-items: flex-start;
+}
+
+.number-container {
+    display: flex;
+    flex-basis: 80%;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.operation-container {
+    display: flex;
+    flex-direction: column;
+    flex-basis: 20%;
+}
+
+.number-btn {
+    flex: 1 0 33%;
+}
+
+.zero-btn {
+    flex-basis: 33%;
 }
