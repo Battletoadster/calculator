@@ -6,14 +6,39 @@ let display = document.querySelector("input");
 let displayText = "";
 
 const numberButtons = document.querySelectorAll(".number-btn");
+const operationButtons = document.querySelectorAll(".operation-btn")
+const zeroButton = document.querySelector(".zero-btn");
+const equalsButton = document.querySelector(".equals-btn");
 
 numberButtons.forEach((button) => {
     button.addEventListener("click", () => {
-        displayText += button.textContent;
-        console.log(displayText);
+        changeDisplay(button);
+    })
+} );
+
+operationButtons.forEach((button) => {
+    button.addEventListener("click", () => {
+        fstOperand = parseInt(display.value);
+        operator = button.textContent;
+        displayText += ` ${button.textContent} `
         display.value = displayText;
     })
-} )
+})
+
+zeroButton.addEventListener("click", () => {
+    changeDisplay(zeroButton);
+});
+
+equalsButton.addEventListener("click", () => {
+    sndOperand = parseInt(displayText.split(operator)[1].trim());
+    display.value = operate(fstOperand, sndOperand, operator);
+});
+
+
+function changeDisplay(button){
+    displayText += button.textContent;
+    display.value = displayText;
+}
 
 function add(num1, num2) {
     return num1 + num2;
