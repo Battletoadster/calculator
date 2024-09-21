@@ -9,6 +9,7 @@ const numberButtons = document.querySelectorAll(".number-btn");
 const operationButtons = document.querySelectorAll(".operation-btn")
 const zeroButton = document.querySelector(".zero-btn");
 const equalsButton = document.querySelector(".equals-btn");
+const clearButton = document.querySelector(".clear-btn");
 
 numberButtons.forEach((button) => {
     button.addEventListener("click", () => {
@@ -24,6 +25,13 @@ operationButtons.forEach((button) => {
         display.value = displayText;
     })
 })
+
+clearButton.addEventListener("click", () => {
+    fstOperand = "";
+    sndOperand = "";
+    display.value = "0";
+    displayText = "";
+});
 
 zeroButton.addEventListener("click", () => {
     changeDisplay(zeroButton);
