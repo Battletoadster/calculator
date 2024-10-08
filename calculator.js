@@ -42,11 +42,15 @@ zeroButton.addEventListener("click", () => {
 });
 
 equalsButton.addEventListener("click", () => {
+    sndOperand = parseInt(displayText.split(operator)[1].trim());
+    if(operator ==="/" && sndOperand === 0){
+        display.value = "Nice try. Clear and try again.";
+        return;
+    }
     if(isNaN(fstOperand) || isNaN(sndOperand)|| operator === null){
         clearCalculator();
         return;
     }
-    sndOperand = parseInt(displayText.split(operator)[1].trim());
     display.value = operate(fstOperand, sndOperand, operator);
 });
 
@@ -81,10 +85,6 @@ function divide(num1, num2) {
 }
 
 function operate(fstOperand, sndOperand, operator) {
-    if(fstOperand===null || sndOperand ===null || operator===null){
-        clearCalculator();
-        return;
-    }
     switch (operator) {
         case "+":
             return add(fstOperand, sndOperand);
