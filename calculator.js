@@ -19,6 +19,13 @@ numberButtons.forEach((button) => {
 
 operationButtons.forEach((button) => {
     button.addEventListener("click", () => {
+        //If there is already an operator in the display field, evaluate the first two operands first
+        if(operator){
+            sndOperand = parseInt(displayText.split(operator)[1].trim());
+            fstOperand = operate(fstOperand, sndOperand, operator);
+            displayText = `${fstOperand}`;
+            display.value = displayText;
+        }
         fstOperand = parseInt(display.value);
         operator = button.textContent;
         displayText += ` ${button.textContent} `
@@ -29,6 +36,7 @@ operationButtons.forEach((button) => {
 clearButton.addEventListener("click", () => {
     fstOperand = "";
     sndOperand = "";
+    operator = "";
     display.value = "0";
     displayText = "";
 });
