@@ -11,6 +11,7 @@ const zeroButton = document.querySelector(".zero-btn");
 const equalsButton = document.querySelector(".equals-btn");
 const clearButton = document.querySelector(".clear-btn");
 const floatingButton = document.querySelector(".floating-point-btn")
+const backspcButton = document.querySelector(".backspc-btn");
 
 numberButtons.forEach((button) => {
     button.addEventListener("click", () => {
@@ -24,9 +25,9 @@ operationButtons.forEach((button) => {
         if (operator) {
             sndOperand = parseFloat(displayText.split(operator)[1].trim());
             fstOperand = operate(fstOperand, sndOperand, operator);
-            if(fstOperand.toString().length > 8){
+            if (fstOperand.toString().length > 8) {
                 displayText = `${fstOperand.toFixed(8)}`;
-            } else{
+            } else {
                 displayText = `${fstOperand}`;
             }
             display.value = displayText;
@@ -38,16 +39,44 @@ operationButtons.forEach((button) => {
     })
 })
 
+backspcButton.addEventListener("click", () => {
+    if (display.value === "") return; // Prevent further action if display is empty
+
+    // Remove the last character
+    displayText = displayText.substring(0, displayText.length - 1);
+    display.value = displayText;
+
+    // If an operator has been removed, reset the operator
+    if (operator && !displayText.includes(operator)) {
+        operator = null;
+    }
+
+    // Handle fstOperand and sndOperand updates accordingly
+    if (operator) {
+        sndOperand = parseFloat(displayText.split(operator)[1].trim());
+    } else {
+        fstOperand = parseFloat(displayText.trim());
+    }
+});
+
 floatingButton.addEventListener("click", () => {
+    if (display.value === "0" || operator === null && fstOperand === null) {
+        displayText = "0."; // Start with 0.
+        display.value = displayText;
+        fstOperand = 0;
+        return;
+    }
+
     if (operator) {
         if (!(display.value.split(operator)[1].trim().includes('.'))) {
             changeDisplay(floatingButton);
         }
     } else {
-        if(!(display.value.includes('.'))){
+        if (!(display.value.includes('.'))) {
             changeDisplay(floatingButton);
         }
     }
+
 });
 
 clearButton.addEventListener("click", () => {
@@ -59,17 +88,18 @@ zeroButton.addEventListener("click", () => {
 });
 
 equalsButton.addEventListener("click", () => {
-    sndOperand = parseFloat(displayText.split(operator)[1].trim());
+    sndOperand = parseFloat(displayText.split(operator)[1]);
     if (operator === "/" && sndOperand === 0) {
         display.value = "Nice try. Clear and try again.";
         return;
     }
-    if (isNaN(fstOperand) || isNaN(sndOperand) || operator === null) {
+    if (isNaN(fstOperand) || isNaN(sndOperand) || operator === null || 
+    fstOperand === null || sndOperand === null) {
         clearCalculator();
         return;
     }
     fstOperand = operate(fstOperand, sndOperand, operator);
-    if(fstOperand.toString().length > 8){
+    if (fstOperand.toString().length > 8) {
         display.value = fstOperand.toFixed(8);
     } else {
         display.value = fstOperand;
@@ -80,9 +110,9 @@ equalsButton.addEventListener("click", () => {
 
 
 function clearCalculator() {
-    fstOperand = "";
-    sndOperand = "";
-    operator = "";
+    fstOperand = null;
+    sndOperand = null;
+    operator = null;
     display.value = "0";
     displayText = "";
 }
