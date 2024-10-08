@@ -16,12 +16,12 @@ numberButtons.forEach((button) => {
     button.addEventListener("click", () => {
         changeDisplay(button);
     })
-} );
+});
 
 operationButtons.forEach((button) => {
     button.addEventListener("click", () => {
         //If there is already an operator in the display field, evaluate the first two operands first
-        if(operator){
+        if (operator) {
             sndOperand = parseFloat(displayText.split(operator)[1].trim());
             fstOperand = operate(fstOperand, sndOperand, operator);
             displayText = `${fstOperand.toFixed(8)}`;
@@ -35,10 +35,16 @@ operationButtons.forEach((button) => {
 })
 
 floatingButton.addEventListener("click", () => {
-    if(!(display.value.includes('.'))){
-        changeDisplay(floatingButton);
+    if (operator) {
+        if (!(display.value.split(operator)[1].trim().includes('.'))) {
+            changeDisplay(floatingButton);
+        }
+    } else {
+        if(!(display.value.includes('.'))){
+            changeDisplay(floatingButton);
+        }
     }
-})
+});
 
 clearButton.addEventListener("click", () => {
     clearCalculator();
@@ -50,11 +56,11 @@ zeroButton.addEventListener("click", () => {
 
 equalsButton.addEventListener("click", () => {
     sndOperand = parseFloat(displayText.split(operator)[1].trim());
-    if(operator ==="/" && sndOperand === 0){
+    if (operator === "/" && sndOperand === 0) {
         display.value = "Nice try. Clear and try again.";
         return;
     }
-    if(isNaN(fstOperand) || isNaN(sndOperand)|| operator === null){
+    if (isNaN(fstOperand) || isNaN(sndOperand) || operator === null) {
         clearCalculator();
         return;
     }
@@ -72,7 +78,7 @@ function clearCalculator() {
     displayText = "";
 }
 
-function changeDisplay(button){
+function changeDisplay(button) {
     displayText += button.textContent;
     display.value = displayText;
 }
