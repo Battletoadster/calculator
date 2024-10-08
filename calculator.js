@@ -24,7 +24,11 @@ operationButtons.forEach((button) => {
         if (operator) {
             sndOperand = parseFloat(displayText.split(operator)[1].trim());
             fstOperand = operate(fstOperand, sndOperand, operator);
-            displayText = `${fstOperand.toFixed(8)}`;
+            if(fstOperand.toString().length > 8){
+                displayText = `${fstOperand.toFixed(8)}`;
+            } else{
+                displayText = `${fstOperand}`;
+            }
             display.value = displayText;
         }
         fstOperand = parseFloat(display.value);
@@ -64,7 +68,12 @@ equalsButton.addEventListener("click", () => {
         clearCalculator();
         return;
     }
-    display.value = operate(fstOperand, sndOperand, operator).toFixed(8);
+    fstOperand = operate(fstOperand, sndOperand, operator);
+    if(fstOperand.toString().length > 8){
+        display.value = fstOperand.toFixed(8);
+    } else {
+        display.value = fstOperand;
+    }
     operator = null;
     sndOperand = null;
 });
