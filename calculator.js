@@ -10,6 +10,7 @@ const operationButtons = document.querySelectorAll(".operation-btn")
 const zeroButton = document.querySelector(".zero-btn");
 const equalsButton = document.querySelector(".equals-btn");
 const clearButton = document.querySelector(".clear-btn");
+const floatingButton = document.querySelector(".floating-point-btn")
 
 numberButtons.forEach((button) => {
     button.addEventListener("click", () => {
@@ -21,16 +22,22 @@ operationButtons.forEach((button) => {
     button.addEventListener("click", () => {
         //If there is already an operator in the display field, evaluate the first two operands first
         if(operator){
-            sndOperand = parseInt(displayText.split(operator)[1].trim());
+            sndOperand = parseFloat(displayText.split(operator)[1].trim());
             fstOperand = operate(fstOperand, sndOperand, operator);
-            displayText = `${fstOperand}`;
+            displayText = `${fstOperand.toFixed(8)}`;
             display.value = displayText;
         }
-        fstOperand = parseInt(display.value);
+        fstOperand = parseFloat(display.value);
         operator = button.textContent;
-        displayText += ` ${button.textContent} `
+        displayText = `${fstOperand} ${button.textContent} `;
         display.value = displayText;
     })
+})
+
+floatingButton.addEventListener("click", () => {
+    if(!(display.value.includes('.'))){
+        changeDisplay(floatingButton);
+    }
 })
 
 clearButton.addEventListener("click", () => {
@@ -42,7 +49,7 @@ zeroButton.addEventListener("click", () => {
 });
 
 equalsButton.addEventListener("click", () => {
-    sndOperand = parseInt(displayText.split(operator)[1].trim());
+    sndOperand = parseFloat(displayText.split(operator)[1].trim());
     if(operator ==="/" && sndOperand === 0){
         display.value = "Nice try. Clear and try again.";
         return;
@@ -51,7 +58,9 @@ equalsButton.addEventListener("click", () => {
         clearCalculator();
         return;
     }
-    display.value = operate(fstOperand, sndOperand, operator);
+    display.value = operate(fstOperand, sndOperand, operator).toFixed(8);
+    operator = null;
+    sndOperand = null;
 });
 
 
