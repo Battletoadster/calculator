@@ -34,11 +34,7 @@ operationButtons.forEach((button) => {
 })
 
 clearButton.addEventListener("click", () => {
-    fstOperand = "";
-    sndOperand = "";
-    operator = "";
-    display.value = "0";
-    displayText = "";
+    clearCalculator();
 });
 
 zeroButton.addEventListener("click", () => {
@@ -46,10 +42,22 @@ zeroButton.addEventListener("click", () => {
 });
 
 equalsButton.addEventListener("click", () => {
+    if(isNaN(fstOperand) || isNaN(sndOperand)|| operator === null){
+        clearCalculator();
+        return;
+    }
     sndOperand = parseInt(displayText.split(operator)[1].trim());
     display.value = operate(fstOperand, sndOperand, operator);
 });
 
+
+function clearCalculator() {
+    fstOperand = "";
+    sndOperand = "";
+    operator = "";
+    display.value = "0";
+    displayText = "";
+}
 
 function changeDisplay(button){
     displayText += button.textContent;
@@ -73,6 +81,10 @@ function divide(num1, num2) {
 }
 
 function operate(fstOperand, sndOperand, operator) {
+    if(fstOperand===null || sndOperand ===null || operator===null){
+        clearCalculator();
+        return;
+    }
     switch (operator) {
         case "+":
             return add(fstOperand, sndOperand);
