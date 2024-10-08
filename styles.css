@@ -43,15 +43,31 @@ html {
 
 .clear-btn,
 .number-btn,
-.special-btn,
-.percentage-btn,
 .floating-point-btn,
 .clear-btn,
 .sign-btn,
-.backspc-btn {
+.backspc-btn,
+.zero-btn{
     flex: 1 0 33%;
 }
 
-.zero-btn {
-    flex-basis: 33%;
+
+.operation-btn{
+    background-color: rgb(173, 230, 173);
+    border: 2px solid rgb(72, 196, 72);
+}
+
+.operation-btn:hover{
+    background-color: rgb(41, 153, 41);
+    border-color: rgb(130, 228, 130);
+}
+
+.clear-btn{
+    background-color: rgb(230, 105, 105);
+    border-color: rgb(102, 0, 0);
+}
+
+.clear-btn:hover{
+    border-color: rgb(230, 105, 105);
+    background-color: rgb(170, 1, 1);
 }
